@@ -27,6 +27,7 @@ public class MainClass {
       BufferedReader br = new BufferedReader(new FileReader(csv));// 要閱讀的最後一行
       while (br.ready()) {
         String line = br.readLine();// 資料元素分為一行
+        String sort;
         StringTokenizer st = new StringTokenizer(line, ",");
         while (st.hasMoreTokens()) {// 每個元素都顯示在一個製表符分隔的線
           System.out.print(st.nextToken() + ",");
