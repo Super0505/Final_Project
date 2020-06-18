@@ -28,13 +28,12 @@ public class MainClass {
       while (br.ready()) {
         String line = br.readLine();// 資料元素分為一行
         StringTokenizer st = new StringTokenizer(line, ",");
-        String stnt = st.nextToken();//找學號
-        //System.out.println(stnt.compareTo(st.nextToken()));
-        //System.out.println(stnt); 
-//        while (st.hasMoreTokens()) {// 每個元素都顯示在一個製表符分隔的線
-//          System.out.print(st.nextToken() + ",");
-//        }
-//        System.out.println();
+//        String stnt = st.nextToken();找學號
+        
+        while (st.hasMoreTokens()) {// 每個元素都顯示在一個製表符分隔的線
+          System.out.print(st.nextToken() + ",");
+        }
+        System.out.println();
       }
       br.close();
     } catch (FileNotFoundException e) {// File物件的建立過程中的異常捕獲
