@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +15,7 @@ import java.util.TreeMap;
 public class MainClass {
 
   public static void main(String[] args) throws Exception {
-    File csv = new File("C:\\Database\\program\\火山矽肺症\\Final_Project\\DB_students.csv"); // CSV資料檔案
+    File csv = new File("DB_students.csv"); // CSV資料檔案
     BufferedReader reader = new BufferedReader(new FileReader(csv));// 要閱讀的最後一行
     Map<String, List<String>> map = new TreeMap<String, List<String>>();
     String line = reader.readLine();//read header
@@ -28,7 +30,6 @@ public class MainClass {
     }
 
     FileWriter fw = new FileWriter("project.txt");
-    fw.write("student_id,course_id\n");
     //System.out.println("student_id,course_id\n");
     for (List<String> list : map.values()) {
       int length = 0;
@@ -48,31 +49,29 @@ public class MainClass {
     reader.close();
     fw.close();
     Scanner scanner = new Scanner(System.in);
-	  while(true) {
-		  	System.out.print("Enter 1 is add\n 2 is remove\n3 is search s_list\n4 is search c_member\n5 is break");
-		    int num = scanner.nextInt();
-	  switch(num) {
-	  case 1:
-			    System.out.print("Enter a s_id:");
-			    String s_id = scanner.next();
-			    System.out.print("Enter a c_id:");
-			    String c_id = scanner.next();
-	  case 2:
-			    System.out.print("Enter a s_id:");
-			    String s_id1 = scanner.next();
-			    System.out.print("Enter a c_id:");
-			    String c_id1 = scanner.next();
-	  case 3:
-			    System.out.print("Enter a s_id:");
-			    String s_id2 = scanner.next();
-			    
-	  case 4:
-			    System.out.print("Enter a c_id:");
-			    String c_id2 = scanner.next();
-	  case 5:
-		  		break;
-	  	}
-	  }
+    System.out.println("1 is add\n2 is remove\n3 is search s_list\n4 is search c_member\n5 exit");
+    int num = scanner.nextInt();
+    switch (num) {
+      case 1:
+        System.out.print("Enter a s_id:");
+        String s_id = scanner.next();
+        System.out.print("Enter a c_id:");
+        String c_id = scanner.next();
+      case 2:
+        System.out.print("Enter a s_id:");
+        String s_id1 = scanner.next();
+        System.out.print("Enter a c_id:");
+        String c_id1 = scanner.next();
+      case 3:
+        System.out.print("Enter a s_id:");
+        String s_id2 = scanner.next();
+        search_S(s_id2, reader);
+      case 4:
+        System.out.print("Enter a c_id:");
+        String c_id2 = scanner.next();
+        search_C(c_id2, reader);
+      case 5:
+        break;
+    }
   }
-
-  }
+  
