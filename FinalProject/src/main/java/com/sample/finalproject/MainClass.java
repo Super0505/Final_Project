@@ -3,6 +3,7 @@ package com.sample.finalproject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -17,22 +18,34 @@ public class MainClass {
     String line = reader.readLine();//read header
     while ((line = reader.readLine()) != null) {
       String key = line.split(",")[0];
-      List<String> l = map.get(key);
-      if (l == null) {
-        l = new LinkedList<String>();
-        map.put(key, l);
+      List<String> str = map.get(key);
+      if (str == null) {
+        str = new LinkedList<String>();
+        map.put(key, str);
       }
-      l.add(line);
+      str.add(line);
     }
 
-    System.out.println("student_id,course_id\n");
+    FileWriter fw = new FileWriter("project.txt");
+    fw.write("student_id,course_id\n");
+    //System.out.println("student_id,course_id\n");
     for (List<String> list : map.values()) {
+      int length = 0;
       for (String val : list) {
-        System.out.println(val);
-        System.out.println("\n");
+        length = val.length();
+        fw.write(val);
+        fw.write("\n");
+//        System.out.println(val);
+//        System.out.println("\n");
       }
+      for (int i = 0; i < 6; i++) {
+        fw.write(".".repeat(length));
+        fw.write("\n");
+      }
+
     }
     reader.close();
+    fw.close();
   }
 
 //  private static String getField(String line) {
