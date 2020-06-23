@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class MainClass {
 
   public static void main(String[] args) throws Exception {
     File csv = new File("DB_students.csv"); // CSV資料檔案
-    BufferedReader reader = new BufferedReader(new FileReader(csv));// 要閱讀的最後一行
+    RandomAccessFile reader = new RandomAccessFile(csv, "rw");// 要閱讀的最後一行
     Map<String, List<String>> map = new TreeMap<String, List<String>>();
     String line = reader.readLine();//read header
     while ((line = reader.readLine()) != null) {
@@ -57,11 +58,13 @@ public class MainClass {
         String s_id = scanner.next();
         System.out.print("Enter a c_id:");
         String c_id = scanner.next();
+        addCourse(s_id, c_id, reader);
       case 2:
         System.out.print("Enter a s_id:");
         String s_id1 = scanner.next();
         System.out.print("Enter a c_id:");
         String c_id1 = scanner.next();
+        deleteCourse(s_id1, c_id1, reader);
       case 3:
         System.out.print("Enter a s_id:");
         String s_id2 = scanner.next();
@@ -74,4 +77,18 @@ public class MainClass {
         break;
     }
   }
-  
+
+  private static void search_C(String c_id2, RandomAccessFile reader) {
+  }
+
+  private static void search_S(String s_id2, RandomAccessFile reader) {
+  }
+
+  private static void addCourse(String s_id, String c_id, RandomAccessFile reader) {
+  }
+
+  private static void deleteCourse(String s_id, String c_id, RandomAccessFile reader) {
+
+  }
+
+}
