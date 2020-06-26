@@ -1,7 +1,6 @@
 package com.sample.finalproject;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -37,19 +36,20 @@ public class MainClass {
         length = val.length();
         fw.write(val);
         fw.write("\n");
-//        System.out.println(val);
-//        System.out.println("\n");
+        //System.out.println(val);
       }
-      for (int i = 0; i < 6; i++) {
-        fw.write(".".repeat(length));
-        fw.write("\n");
-      }
-
+//      for (int i = 0; i < 6; i++) {
+//        fw.write(".".repeat(length));
+//        fw.write("\n");
+//      }
     }
+    reader.close();
+    fw.close();
 
     Scanner scanner = new Scanner(System.in);
+    RandomAccessFile bf = new RandomAccessFile("project.txt", "rw");
     while (true) {
-      System.out.println("1. Add\n2. Remove\n3. Search Couerses by S_ID\n4 Search Students by C_ID\n5 Exit");
+      System.out.println("1. Add\n2. Remove\n3. Search Couerses by S_ID\n4. Search Students by C_ID\n5. Exit");
       int num = scanner.nextInt();
       switch (num) {
         case 1:
@@ -57,69 +57,58 @@ public class MainClass {
           String s_id = scanner.next();
           System.out.print("Enter a c_id:");
           String c_id = scanner.next();
-          addCourse(s_id, c_id, reader);
-          continue;
+          addCourse(s_id, c_id, bf);
+          break;
         case 2:
           System.out.print("Enter a s_id:");
           String s_id1 = scanner.next();
           System.out.print("Enter a c_id:");
           String c_id1 = scanner.next();
-          deleteCourse(s_id1, c_id1, reader);
-          continue;
+          deleteCourse(s_id1, c_id1, bf);
+          break;
         case 3:
           System.out.print("Enter a s_id:");
           String s_id2 = scanner.next();
-          Search_S ss = new Search_S(s_id2, reader);
-          continue;
+          search_S(s_id2, bf);
+          break;
         case 4:
           System.out.print("Enter a c_id:");
           String c_id2 = scanner.next();
-          search_C(c_id2, reader);
-          continue;
+          search_C(c_id2, bf);
+          break;
         case 5:
           break;
       }
     }
-//    reader.close();
-//    fw.close();
   }
 
-  private static void addCourse(String s_id, String c_id, BufferedReader reader) {
+  private static void addCourse(String s_id, String c_id, RandomAccessFile reader) {
   }
 
-  private static void deleteCourse(String s_id, String c_id, BufferedReader reader) {
+  private static void deleteCourse(String s_id, String c_id, RandomAccessFile reader) {
 
   }
 
-//  private  void search_S(String s_id, BufferedReader reader) throws IOException {
-//    ArrayList<String> data = new ArrayList<String>();
-//    String line;
-//    while ((line = reader.readLine()) != null) {
-//      String key = line.split(",")[0];
-//      if (key.equals(s_id)) {
-//        data.add(line);
-//      }
-//    }
-//    for (String ll : data) {
-//      System.out.println(ll);
-//    }
-//
-//  }
-
-  public void search_C(String c_id, BufferedReader reader) throws IOException {
-    ArrayList<String> data = new ArrayList<String>();
+  public static void search_S(String s_id, RandomAccessFile reader) throws IOException {
     String line;
+    while ((line = reader.readLine()) != null) {
+      String key = line.split(",")[0];
+      if (key.equalsIgnoreCase(s_id)) {
+        System.out.println(line);
+      }
+    }
+  }
+
+  public static void search_C(String c_id, RandomAccessFile reader) throws IOException {
+    String line;
+    int i = 0;
     while ((line = reader.readLine()) != null) {
       String key = line.split(",")[1];
       if (key.equals(c_id)) {
-        data.add(line);
+        //System.out.println(line);
+        i++;
       }
     }
-    for (String ll : data) {
-      System.out.println(ll);
-    }
-    System.out.println("人數: " + data.size());
-
+    System.out.println("人數: " + i + "人");
   }
-
 }
