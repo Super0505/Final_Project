@@ -1,6 +1,8 @@
 package com.sample.finalproject;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -14,8 +16,7 @@ import java.util.TreeMap;
 public class MainClass {
 
   public static void main(String[] args) throws Exception {
-    File csv = new File("DB_students.csv"); // CSV資料檔案
-    RandomAccessFile reader = new RandomAccessFile(csv, "rw");// 要閱讀的最後一行
+    BufferedReader reader = new BufferedReader(new FileReader("DB_students.csv"));// 要閱讀的最後一行
     Map<String, List<String>> map = new TreeMap<String, List<String>>();
     String line = reader.readLine();// read header
     while ((line = reader.readLine()) != null) {
@@ -83,14 +84,14 @@ public class MainClass {
 //    fw.close();
   }
 
-  private static void addCourse(String s_id, String c_id, RandomAccessFile reader) {
+  private static void addCourse(String s_id, String c_id, BufferedReader reader) {
   }
 
-  private static void deleteCourse(String s_id, String c_id, RandomAccessFile reader) {
+  private static void deleteCourse(String s_id, String c_id, BufferedReader reader) {
 
   }
 
-  private static void search_S(String s_id, RandomAccessFile reader) throws IOException {
+  private static void search_S(String s_id, BufferedReader reader) throws IOException {
     ArrayList<String> data = new ArrayList<String>();
     String line;
     while ((line = reader.readLine()) != null) {
@@ -105,7 +106,7 @@ public class MainClass {
 
   }
 
-  private static void search_C(String c_id, RandomAccessFile reader) throws IOException {
+  private static void search_C(String c_id, BufferedReader reader) throws IOException {
     ArrayList<String> data = new ArrayList<String>();
     String line;
     while ((line = reader.readLine()) != null) {
