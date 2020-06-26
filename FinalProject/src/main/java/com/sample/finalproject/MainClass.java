@@ -1,8 +1,6 @@
 package com.sample.finalproject;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -19,7 +17,7 @@ public class MainClass {
     File csv = new File("DB_students.csv"); // CSV資料檔案
     RandomAccessFile reader = new RandomAccessFile(csv, "rw");// 要閱讀的最後一行
     Map<String, List<String>> map = new TreeMap<String, List<String>>();
-    String line = reader.readLine();//read header
+    String line = reader.readLine();// read header
     while ((line = reader.readLine()) != null) {
       String key = line.split(",")[0];
       List<String> str = map.get(key);
@@ -31,7 +29,7 @@ public class MainClass {
     }
 
     FileWriter fw = new FileWriter("project.txt");
-    //System.out.println("student_id,course_id\n");
+    // System.out.println("student_id,course_id\n");
     for (List<String> list : map.values()) {
       int length = 0;
       for (String val : list) {
@@ -47,47 +45,79 @@ public class MainClass {
       }
 
     }
-    reader.close();
-    fw.close();
+
     Scanner scanner = new Scanner(System.in);
-    System.out.println("1 is add\n2 is remove\n3 is search s_list\n4 is search c_member\n5 exit");
-    int num = scanner.nextInt();
-    switch (num) {
-      case 1:
-        System.out.print("Enter a s_id:");
-        String s_id = scanner.next();
-        System.out.print("Enter a c_id:");
-        String c_id = scanner.next();
-        addCourse(s_id, c_id, reader);
-      case 2:
-        System.out.print("Enter a s_id:");
-        String s_id1 = scanner.next();
-        System.out.print("Enter a c_id:");
-        String c_id1 = scanner.next();
-        deleteCourse(s_id1, c_id1, reader);
-      case 3:
-        System.out.print("Enter a s_id:");
-        String s_id2 = scanner.next();
-        search_S(s_id2, reader);
-      case 4:
-        System.out.print("Enter a c_id:");
-        String c_id2 = scanner.next();
-        search_C(c_id2, reader);
-      case 5:
-        break;
+    while (true) {
+      System.out.println("1. Add\n2. Remove\n3. Search Couerses by S_ID\n4 Search Students by C_ID\n5 Exit");
+      int num = scanner.nextInt();
+      switch (num) {
+        case 1:
+          System.out.print("Enter a s_id:");
+          String s_id = scanner.next();
+          System.out.print("Enter a c_id:");
+          String c_id = scanner.next();
+          addCourse(s_id, c_id, reader);
+          continue;
+        case 2:
+          System.out.print("Enter a s_id:");
+          String s_id1 = scanner.next();
+          System.out.print("Enter a c_id:");
+          String c_id1 = scanner.next();
+          deleteCourse(s_id1, c_id1, reader);
+          continue;
+        case 3:
+          System.out.print("Enter a s_id:");
+          String s_id2 = scanner.next();
+          search_S(s_id2, reader);
+          continue;
+        case 4:
+          System.out.print("Enter a c_id:");
+          String c_id2 = scanner.next();
+          search_C(c_id2, reader);
+          continue;
+        case 5:
+          break;
+      }
     }
-  }
-
-  private static void search_C(String c_id2, RandomAccessFile reader) {
-  }
-
-  private static void search_S(String s_id2, RandomAccessFile reader) {
+//    reader.close();
+//    fw.close();
   }
 
   private static void addCourse(String s_id, String c_id, RandomAccessFile reader) {
   }
 
   private static void deleteCourse(String s_id, String c_id, RandomAccessFile reader) {
+
+  }
+
+  private static void search_S(String s_id, RandomAccessFile reader) throws IOException {
+    ArrayList<String> data = new ArrayList<String>();
+    String line;
+    while ((line = reader.readLine()) != null) {
+      String key = line.split(",")[0];
+      if (key.equals(s_id)) {
+        data.add(line);
+      }
+    }
+    for (String ll : data) {
+      System.out.println(ll);
+    }
+
+  }
+
+  private static void search_C(String c_id, RandomAccessFile reader) throws IOException {
+    ArrayList<String> data = new ArrayList<String>();
+    String line;
+    while ((line = reader.readLine()) != null) {
+      String key = line.split(",")[1];
+      if (key.equals(c_id)) {
+        data.add(line);
+      }
+    }
+    for (String ll : data) {
+      System.out.println(ll);
+    }
+    System.out.println("人數: " + data.size());
 
   }
 
