@@ -69,7 +69,7 @@ public class MainClass {
         case 3:
           System.out.print("Enter a s_id:");
           String s_id2 = scanner.next();
-          search_S(s_id2, reader);
+          Search_S ss = new Search_S(s_id2, reader);
           continue;
         case 4:
           System.out.print("Enter a c_id:");
@@ -91,22 +91,22 @@ public class MainClass {
 
   }
 
-  private static void search_S(String s_id, BufferedReader reader) throws IOException {
-    ArrayList<String> data = new ArrayList<String>();
-    String line;
-    while ((line = reader.readLine()) != null) {
-      String key = line.split(",")[0];
-      if (key.equals(s_id)) {
-        data.add(line);
-      }
-    }
-    for (String ll : data) {
-      System.out.println(ll);
-    }
+//  private  void search_S(String s_id, BufferedReader reader) throws IOException {
+//    ArrayList<String> data = new ArrayList<String>();
+//    String line;
+//    while ((line = reader.readLine()) != null) {
+//      String key = line.split(",")[0];
+//      if (key.equals(s_id)) {
+//        data.add(line);
+//      }
+//    }
+//    for (String ll : data) {
+//      System.out.println(ll);
+//    }
+//
+//  }
 
-  }
-
-  private static void search_C(String c_id, BufferedReader reader) throws IOException {
+  public void search_C(String c_id, BufferedReader reader) throws IOException {
     ArrayList<String> data = new ArrayList<String>();
     String line;
     while ((line = reader.readLine()) != null) {
