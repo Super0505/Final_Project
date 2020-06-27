@@ -15,6 +15,7 @@ import java.util.TreeMap;
 public class MainClass {
 
   public static void main(String[] args) throws Exception {
+    int length = 0;
     BufferedReader reader = new BufferedReader(new FileReader("DB_students.csv"));// 要閱讀的最後一行
     Map<String, List<String>> map = new TreeMap<String, List<String>>();
     String line = reader.readLine();// read header
@@ -31,17 +32,16 @@ public class MainClass {
     FileWriter fw = new FileWriter("project.txt");
     // System.out.println("student_id,course_id\n");
     for (List<String> list : map.values()) {
-      int length = 0;
       for (String val : list) {
         length = val.length();
         fw.write(val);
         fw.write("\n");
         //System.out.println(val);
       }
-//      for (int i = 0; i < 6; i++) {
-//        fw.write(".".repeat(length));
-//        fw.write("\n");
-//      }
+      for (int i = 0; i < 6; i++) {
+        fw.write(".".repeat(length - 5) + "," + ".".repeat(4));
+        fw.write("\n");
+      }
     }
     reader.close();
     fw.close();
@@ -82,11 +82,19 @@ public class MainClass {
     }
   }
 
-  private static void addCourse(String s_id, String c_id, RandomAccessFile reader) {
+  private static void addCourse(String s_id, String c_id, RandomAccessFile reader) throws IOException {
+    String line;
+    while ((line = reader.readLine()) != null) {
+      String key = line.split(",")[0];
+      if (key.equalsIgnoreCase(s_id)) {
+        reader.readLine();
+        reader.writeBytes(s_id + "," + c_id);
+      }
+    }
+
   }
 
-  private static void deleteCourse(String s_id, String c_id, RandomAccessFile reader) {
-
+  private static void deleteCourse(String s_id, String c_id, RandomAccessFile reader) throws IOException {
   }
 
   public static void search_S(String s_id, RandomAccessFile reader) throws IOException {
